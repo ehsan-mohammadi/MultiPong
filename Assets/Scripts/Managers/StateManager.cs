@@ -5,7 +5,7 @@ namespace MultiPong.Managers
     using Services;
     using Events;
 
-    public enum GameState { Start, Play, End }
+    public enum GameState { Start, WaitingForOpponent, Play, End }
 
     public class StateManager : IEventListener
     {
@@ -35,7 +35,7 @@ namespace MultiPong.Managers
         public void OnEvent(IEvent evt, object sender)
         {
             if (evt is PlayButtonClickedEvent)
-                GoToState(GameState.Play);
+                GoToState(GameState.WaitingForOpponent);
         }
 
         public void GoToState(GameState state) => GameState = state;

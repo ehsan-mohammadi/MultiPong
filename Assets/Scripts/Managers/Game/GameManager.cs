@@ -32,6 +32,10 @@ namespace MultiPong.Managers.Game
                     Debug.Log("Switched GameState to Start.");
                     TransitionManager.GoToMainMenu();
                     break;
+                case GameState.WaitingForOpponent:
+                    Debug.Log("Switched GameState to WaitingForOpponent.");
+                    TransitionManager.GoToWaitingForOpponent();
+                    break;
                 case GameState.Play:
                     Debug.Log("Switched GameState to Play.");
                     break;

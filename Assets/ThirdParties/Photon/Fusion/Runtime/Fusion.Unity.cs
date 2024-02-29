@@ -1,6 +1,6 @@
 #if !FUSION_DEV
 
-#region Assets/Photon/Fusion/Runtime/FusionAssetSource.Common.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/FusionAssetSource.Common.cs
 
 // merged AssetSource
 
@@ -404,14 +404,14 @@ namespace Fusion {
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/FusionBurstIntegration.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/FusionBurstIntegration.cs
 
 // deleted
 
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/FusionCoroutine.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/FusionCoroutine.cs
 
 ﻿
 namespace Fusion {
@@ -480,7 +480,7 @@ namespace Fusion {
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/FusionProfiler.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/FusionProfiler.cs
 
 namespace Fusion {
 #if FUSION_PROFILER_INTEGRATION
@@ -546,7 +546,7 @@ namespace Fusion {
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/FusionRuntimeCheck.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/FusionRuntimeCheck.cs
 
 namespace Fusion {
   using UnityEngine;
@@ -577,7 +577,7 @@ namespace Fusion {
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/FusionStats.Controls.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/FusionStats.Controls.cs
 
 namespace Fusion
 {
@@ -751,7 +751,7 @@ namespace Fusion
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/FusionStats.Create.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/FusionStats.Create.cs
 
 namespace Fusion
 {
@@ -1045,7 +1045,7 @@ namespace Fusion
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/FusionStats.Layout.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/FusionStats.Layout.cs
 
 namespace Fusion
 {
@@ -1297,7 +1297,7 @@ namespace Fusion
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/FusionStats.Statics.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/FusionStats.Statics.cs
 
 
 namespace Fusion
@@ -1345,7 +1345,7 @@ namespace Fusion
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/FusionStatsExtensions.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/FusionStatsExtensions.cs
 
 
 namespace Fusion.StatsInternal
@@ -1484,7 +1484,7 @@ namespace Fusion.StatsInternal
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/FusionStatsGraphBase.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/FusionStatsGraphBase.cs
 
 namespace Fusion {
   using System.Reflection;
@@ -1812,7 +1812,7 @@ namespace Fusion {
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/FusionStatsUtilities.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/FusionStatsUtilities.cs
 
 namespace Fusion.StatsInternal {
   using UnityEngine;
@@ -2167,7 +2167,7 @@ namespace Fusion.StatsInternal {
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/FusionUnityLogger.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/FusionUnityLogger.cs
 
 namespace Fusion {
   using System;
@@ -2507,7 +2507,7 @@ namespace Fusion {
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/NetworkObjectBaker.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/NetworkObjectBaker.cs
 
 ﻿//#undef UNITY_EDITOR
 namespace Fusion {
@@ -2916,7 +2916,7 @@ namespace Fusion {
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/NetworkPrefabSourceUnity.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/NetworkPrefabSourceUnity.cs
 
 ﻿namespace Fusion {
   using System;
@@ -2952,7 +2952,7 @@ namespace Fusion {
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/Utilities/FusionScalableIMGUI.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/Utilities/FusionScalableIMGUI.cs
 
 namespace Fusion {
   using System.Reflection;
@@ -3042,7 +3042,7 @@ namespace Fusion {
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/Utilities/FusionUnitySceneManagerUtils.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/Utilities/FusionUnitySceneManagerUtils.cs
 
 ﻿namespace Fusion {
   using System;
@@ -3281,7 +3281,7 @@ namespace Fusion {
 #endregion
 
 
-#region Assets/Photon/Fusion/Runtime/Utilities/RunnerVisibility/NetworkRunnerVisibilityExtensions.cs
+#region Assets/ThirdParties/Photon/Fusion/Runtime/Utilities/RunnerVisibility/NetworkRunnerVisibilityExtensions.cs
 
 namespace Fusion
 {

@@ -1,13 +1,13 @@
 #if !FUSION_DEV
 
-#region Assets/Photon/Fusion/CodeGen/AssemblyInfo.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/AssemblyInfo.cs
 
 [assembly: Fusion.NetworkAssemblyIgnore]
 
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ForLoopMacro.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ForLoopMacro.cs
 
 ﻿#if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 namespace Fusion.CodeGen {
@@ -182,7 +182,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILMacroStruct.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILMacroStruct.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 
@@ -228,7 +228,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaver.Cache.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaver.Cache.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 namespace Fusion.CodeGen {
@@ -608,7 +608,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaver.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaver.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 
@@ -1957,7 +1957,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaver.INetworkedStruct.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaver.INetworkedStruct.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 namespace Fusion.CodeGen {
@@ -2200,7 +2200,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaver.NetworkBehaviour.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaver.NetworkBehaviour.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 namespace Fusion.CodeGen {
@@ -2923,7 +2923,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaverAssembly.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaverAssembly.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 namespace Fusion.CodeGen {
@@ -3160,7 +3160,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaverAssemblyResolver.ILPostProcessor.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaverAssemblyResolver.ILPostProcessor.cs
 
 #if FUSION_WEAVER && FUSION_WEAVER_ILPOSTPROCESSOR && FUSION_HAS_MONO_CECIL
 
@@ -3258,7 +3258,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaverAssemblyResolver.UnityEditor.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaverAssemblyResolver.UnityEditor.cs
 
 #if FUSION_WEAVER && !FUSION_WEAVER_ILPOSTPROCESSOR && FUSION_HAS_MONO_CECIL
 
@@ -3352,7 +3352,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaverBindings.ILPostProcessor.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaverBindings.ILPostProcessor.cs
 
 #if FUSION_WEAVER_ILPOSTPROCESSOR
 namespace Fusion.CodeGen {
@@ -3684,7 +3684,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaverBindings.UnityEditor.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaverBindings.UnityEditor.cs
 
 #if FUSION_WEAVER && !FUSION_WEAVER_ILPOSTPROCESSOR
 
@@ -3839,7 +3839,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaverException.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaverException.cs
 
 namespace Fusion.CodeGen {
   using System;
@@ -3865,7 +3865,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaverExtensions.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaverExtensions.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 namespace Fusion.CodeGen {
@@ -4626,7 +4626,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaverLog.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaverLog.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 
@@ -4795,7 +4795,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaverLoggerDiagnosticMessages.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaverLoggerDiagnosticMessages.cs
 
 #if FUSION_WEAVER && FUSION_WEAVER_ILPOSTPROCESSOR && FUSION_HAS_MONO_CECIL
 
@@ -4858,7 +4858,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaverLoggerUnityDebug.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaverLoggerUnityDebug.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 
@@ -4895,7 +4895,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaverMethodContext.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaverMethodContext.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 
@@ -5277,7 +5277,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaverOpCodes.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaverOpCodes.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 namespace Fusion.CodeGen {
@@ -5579,7 +5579,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/ILWeaverSettings.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/ILWeaverSettings.cs
 
 #if FUSION_WEAVER
 namespace Fusion.CodeGen {
@@ -5589,7 +5589,7 @@ namespace Fusion.CodeGen {
 
     public static string DefaultConfigPath {
       get {
-        string result = "Assets/Photon/Fusion/Resources/NetworkProjectConfig.fusion";
+        string result = "Assets/ThirdParties/Photon/Fusion/Resources/NetworkProjectConfig.fusion";
         OverrideNetworkProjectConfigPath(ref result);
         return result;
       }
@@ -5617,7 +5617,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/InstructionEqualityComparer.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/InstructionEqualityComparer.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 namespace Fusion.CodeGen {
@@ -5654,7 +5654,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/MemberReferenceFullNameComparer.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/MemberReferenceFullNameComparer.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 namespace Fusion.CodeGen {
@@ -5695,7 +5695,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/MonoCecilExtensions.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/MonoCecilExtensions.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 namespace Fusion.CodeGen {
@@ -6223,7 +6223,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/NetworkTypeInfo.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/NetworkTypeInfo.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 namespace Fusion.CodeGen {
@@ -6453,7 +6453,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/NetworkTypeInfoRegistry.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/NetworkTypeInfoRegistry.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 namespace Fusion.CodeGen {
@@ -7298,7 +7298,7 @@ namespace Fusion.CodeGen {
 #endregion
 
 
-#region Assets/Photon/Fusion/CodeGen/NetworkTypeWrapInfo.cs
+#region Assets/ThirdParties/Photon/Fusion/CodeGen/NetworkTypeWrapInfo.cs
 
 #if FUSION_WEAVER && FUSION_HAS_MONO_CECIL
 namespace Fusion.CodeGen {

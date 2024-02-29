@@ -14,6 +14,8 @@ namespace MultiPong.Services
 
         public static void Register(IService service) => services.Add(service);
 
+        public static void Unregister(IService service) => services.Remove(service);
+
         public static T Find<T>() where T : IService => services.Get<T>();
     }
 }

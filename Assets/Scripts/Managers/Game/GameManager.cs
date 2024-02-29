@@ -2,8 +2,12 @@ using UnityEngine;
 
 namespace MultiPong.Managers.Game
 {
+    using Configurations;
+
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private ConfigurationMaster configurationMaster;
+        
         private GameInitializer initializer;
 
         private void Awake()
@@ -13,7 +17,7 @@ namespace MultiPong.Managers.Game
 
         private void Initialize()
         {
-            initializer = new GameInitializer(this);
+            initializer = new GameInitializer(this, configurationMaster);
             initializer.Initialize();
         }
 

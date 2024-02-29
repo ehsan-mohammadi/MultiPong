@@ -19,6 +19,11 @@ namespace MultiPong.Foundation
             entities.Add(entity.GetType(), entity);
         }
 
+        public void Remove(T entity)
+        {
+            entities.Remove(entities.GetType());
+        }
+
         public TEntity Get<TEntity>() where TEntity : T
         {
             Type type = typeof(TEntity);

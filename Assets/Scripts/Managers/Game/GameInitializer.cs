@@ -2,21 +2,31 @@ namespace MultiPong.Managers.Game
 {
     using Managers;
     using Services;
+    using Configurations;
 
     public class GameInitializer
     {
         private readonly GameManager gameManager;
-        private StateManager stateManager;
+        private readonly ConfigurationMaster configurationMaster;
+        
+        internal ConfigurerService ConfigurerService { get; private set; }
+        internal EventManager EventManager { get; private set; }
+        internal StateManager StateManager { get; private set; }
+        internal TransitionManager TransitionManager { get; private set; }
 
-        public GameInitializer(GameManager gameManager)
+        public GameInitializer(GameManager gameManager, ConfigurationMaster configurationMaster)
         {
             this.gameManager = gameManager;
+            this.configurationMaster = configurationMaster;
         }
 
         public void Initialize()
         {
             InitializeServiceLocator();
+            InitializeConfigurationService();
+            InitializeEventManager();
             InitializeStateManager();
+            InitializeTransitionManager();
         }
 
         private void InitializeServiceLocator()
@@ -24,11 +34,28 @@ namespace MultiPong.Managers.Game
             ServiceLocator.Initialize();
         }
 
+        private void InitializeConfigurationService()
+        {
+            ConfigurerService = new ConfigurerService();
+            ConfigurerService.Initialize();
+            configurationMaster.Register(ConfigurerService);
+        }
+
+        private void InitializeEventManager()
+        {
+            EventManager = new EventManager();
+        }
+
         private void InitializeStateManager()
         {
-            stateManager = new StateManager();
-            stateManager.Setup(gameManager.PrepareForState);
-            stateManager.GoToState(GameState.Start);
+            StateManager = new StateManager();
+            StateManager.Setup(gameManager.PrepareForState);
+            StateManager.GoToState(GameState.Start);
+        }
+
+        private void InitializeTransitionManager()
+        {
+            TransitionManager = new TransitionManager();
         }
     }
 }

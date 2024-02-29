@@ -1,0 +1,11 @@
+/.vscode
+/obj
+/Library
+/Logs
+/Temp
+/Output
+/Files
+/UserSettings
+*.code-workspace
+*.sln
+*.csproj

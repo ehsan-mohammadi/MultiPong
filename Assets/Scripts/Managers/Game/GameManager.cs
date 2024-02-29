@@ -11,7 +11,7 @@ namespace MultiPong.Managers.Game
         
         private GameInitializer initializer;
 
-        private PopupManager PopupManager => initializer.PopupManager;
+        private TransitionManager TransitionManager => initializer.TransitionManager;
 
         private void Awake()
         {
@@ -30,7 +30,7 @@ namespace MultiPong.Managers.Game
             {
                 case GameState.Start:
                     Debug.Log("Switched GameState to Start.");
-                    PopupManager.OpenPopup<MainMenuPopup>();
+                    TransitionManager.GoToMainMenu();
                     break;
                 case GameState.Play:
                     Debug.Log("Switched GameState to Play.");

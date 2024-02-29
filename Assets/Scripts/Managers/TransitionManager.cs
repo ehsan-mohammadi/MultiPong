@@ -1,15 +1,13 @@
 namespace MultiPong.Managers
 {
-    using Services;
-    using Presenters.Popups;
+    using Handlers.Presentaions;
 
     public class TransitionManager
     {
-        private PopupManager PopupManager => ServiceLocator.Find<PopupManager>();
-
         public void GoToMainMenu()
         {
-            PopupManager.OpenPopup<MainMenuPopup>();
+            var mainMenuPresentationHandler = new MainMenuPresentationHandler();
+            mainMenuPresentationHandler.OpenMainMenuPopup();
         }
     }
 }

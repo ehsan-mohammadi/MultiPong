@@ -2,6 +2,7 @@ namespace MultiPong.Managers.Game
 {
     using Managers;
     using Services;
+    using Factories;
     using Configurations;
 
     public class GameInitializer
@@ -11,6 +12,7 @@ namespace MultiPong.Managers.Game
         
         internal ConfigurerService ConfigurerService { get; private set; }
         internal EventManager EventManager { get; private set; }
+        internal PopupManager PopupManager { get; private set; }
         internal StateManager StateManager { get; private set; }
         internal TransitionManager TransitionManager { get; private set; }
 
@@ -25,6 +27,7 @@ namespace MultiPong.Managers.Game
             InitializeServiceLocator();
             InitializeConfigurationService();
             InitializeEventManager();
+            InitializePopupManager();
             InitializeStateManager();
             InitializeTransitionManager();
         }
@@ -44,6 +47,13 @@ namespace MultiPong.Managers.Game
         private void InitializeEventManager()
         {
             EventManager = new EventManager();
+        }
+
+        private void InitializePopupManager()
+        {
+            var popupFactory = new PopupFactory();
+            PopupManager = new PopupManager();
+            PopupManager.Setup(popupFactory);
         }
 
         private void InitializeStateManager()

@@ -3,12 +3,15 @@ using UnityEngine;
 namespace MultiPong.Managers.Game
 {
     using Configurations;
+    using Presenters.Popups;
 
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private ConfigurationMaster configurationMaster;
         
         private GameInitializer initializer;
+
+        private PopupManager PopupManager => initializer.PopupManager;
 
         private void Awake()
         {
@@ -27,6 +30,7 @@ namespace MultiPong.Managers.Game
             {
                 case GameState.Start:
                     Debug.Log("Switched GameState to Start.");
+                    PopupManager.OpenPopup<MainMenuPopup>();
                     break;
                 case GameState.Play:
                     Debug.Log("Switched GameState to Play.");

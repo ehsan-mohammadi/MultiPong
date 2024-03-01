@@ -2,6 +2,7 @@ namespace MultiPong.Managers.Game
 {
     using Foundation;
     using Managers;
+    using Managers.Gameplay;
     using Services;
     using Factories;
     using Configurations;
@@ -38,7 +39,13 @@ namespace MultiPong.Managers.Game
             var networkManager = new NetworkManager();
             networkManager.Setup(new NetworkFactory());
             managers.Add(networkManager);
+        }
 
+        public void InitializeGameplayManager()
+        {
+            var gameplayManager = new GameplayManager();
+            gameplayManager.Initialize();
+            managers.Add(gameplayManager);
         }
 
         private void InitializeServiceLocator()

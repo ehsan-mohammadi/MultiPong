@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace MultiPong.Managers.Game
 {
+    using Managers.Gameplay;
     using Configurations;
 
     public class GameManager : MonoBehaviour, IManager
@@ -37,6 +38,7 @@ namespace MultiPong.Managers.Game
                 case GameState.Play:
                     Debug.Log("Switched GameState to Play.");
                     GetManager<TransitionManager>().GoToPlay();
+                    PreparingGameplayManager();
                     break;
                 case GameState.End:
                     Debug.Log("Switched GameState to End.");
@@ -50,6 +52,12 @@ namespace MultiPong.Managers.Game
         {
             initializer.InitializeNetworkManager();
             GetManager<NetworkManager>().Activate();
+        }
+
+        private void PreparingGameplayManager()
+        {
+            initializer.InitializeGameplayManager();
+            GetManager<GameplayManager>().Activate();
         }
 
         private T GetManager<T>() where T : IManager => initializer.Managers.Get<T>();

@@ -11,7 +11,7 @@ namespace MultiPong.Managers
     using Services;
     using Events;
 
-    public class NetworkManager : IManager, INetworkRunnerCallbacks
+    public class NetworkManager : IManager, IService, INetworkRunnerCallbacks
     {
         private const int MAX_PLAYERS = 2;
         private const string SESSION_NAME = "TestSession";
@@ -21,6 +21,11 @@ namespace MultiPong.Managers
         private NetworkSceneManagerDefault networkSceneManager;
 
         private EventManager EventManager => ServiceLocator.Find<EventManager>();
+
+        public NetworkManager()
+        {
+            ServiceLocator.Register(this);
+        }
 
         public void Setup(NetworkFactory networkFactory)
         {

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace MultiPong.Foundation
@@ -33,6 +34,11 @@ namespace MultiPong.Foundation
             throw new Exception($"The {tag} of type '{type}' does not found.");
 
             bool IsExists() => entities.ContainsKey(type);
+        }
+
+        public IEnumerable<T> GetAll()
+        {
+            return entities.Select(entity => entity.Value);
         }
     }
 }

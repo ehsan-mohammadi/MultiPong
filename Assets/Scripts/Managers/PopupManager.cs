@@ -6,7 +6,7 @@ namespace MultiPong.Managers
     using Services;
     using Presenters.Popups;
 
-    public class PopupManager : IService
+    public class PopupManager : IManager, IService
     {
         private PopupFactory popupFactory;
 

@@ -5,7 +5,7 @@ namespace MultiPong.Handlers.Presentaions
     using Events;
     using Presenters.Popups;
 
-    public class MainMenuPresentationHandler : IHandler
+    public class MainMenuPresentationHandler : IPresentationHandler
     {
         private PopupManager PopupManager => ServiceLocator.Find<PopupManager>();
         private EventManager EventManager => ServiceLocator.Find<EventManager>();

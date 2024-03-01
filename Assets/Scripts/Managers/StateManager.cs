@@ -7,7 +7,7 @@ namespace MultiPong.Managers
 
     public enum GameState { Start, WaitingForOpponent, Play, End }
 
-    public class StateManager : IEventListener
+    public class StateManager : IManager, IEventListener
     {
         private GameState gameState;
         private Action<GameState> onStateChanged;

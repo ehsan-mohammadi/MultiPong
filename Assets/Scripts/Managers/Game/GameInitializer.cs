@@ -1,5 +1,6 @@
 namespace MultiPong.Managers.Game
 {
+    using Foundation;
     using Managers;
     using Services;
     using Factories;
@@ -7,18 +8,18 @@ namespace MultiPong.Managers.Game
 
     public class GameInitializer
     {
+        private const string TAG = "manager";
         private readonly GameManager gameManager;
+        private readonly Container<IManager> managers;
         private readonly ConfigurationMaster configurationMaster;
         
-        internal ConfigurerService ConfigurerService { get; private set; }
-        internal EventManager EventManager { get; private set; }
-        internal PopupManager PopupManager { get; private set; }
-        internal TransitionManager TransitionManager { get; private set; }
-        internal StateManager StateManager { get; private set; }
+        private ConfigurerService configurerService;
+        internal Container<IManager> Managers => managers;
 
         public GameInitializer(GameManager gameManager, ConfigurationMaster configurationMaster)
         {
             this.gameManager = gameManager;
+            this.managers = new Container<IManager>(TAG);
             this.configurationMaster = configurationMaster;
         }
 
@@ -32,6 +33,14 @@ namespace MultiPong.Managers.Game
             InitializeStateManager();
         }
 
+        public void InitializeNetworkManager()
+        {
+            var networkManager = new NetworkManager();
+            networkManager.Setup(new NetworkFactory());
+            managers.Add(networkManager);
+
+        }
+
         private void InitializeServiceLocator()
         {
             ServiceLocator.Initialize();
@@ -39,33 +48,34 @@ namespace MultiPong.Managers.Game
 
         private void InitializeConfigurationService()
         {
-            ConfigurerService = new ConfigurerService();
-            ConfigurerService.Initialize();
-            configurationMaster.Register(ConfigurerService);
+            configurerService = new ConfigurerService();
+            configurerService.Initialize();
+            configurationMaster.Register(configurerService);
         }
 
         private void InitializeEventManager()
         {
-            EventManager = new EventManager();
+            managers.Add(new EventManager());
         }
 
         private void InitializePopupManager()
         {
-            var popupFactory = new PopupFactory();
-            PopupManager = new PopupManager();
-            PopupManager.Setup(popupFactory);
+            var popupManager = new PopupManager();
+            popupManager.Setup(new PopupFactory());
+            managers.Add(popupManager);
         }
 
         private void InitializeTransitionManager()
         {
-            TransitionManager = new TransitionManager();
+            managers.Add(new TransitionManager());
         }
 
         private void InitializeStateManager()
         {
-            StateManager = new StateManager();
-            StateManager.Setup(gameManager.PrepareForState);
-            StateManager.GoToState(GameState.Start);
+            var stateManager = new StateManager();
+            stateManager.Setup(gameManager.PrepareForState);
+            stateManager.GoToState(GameState.Start);
+            managers.Add(stateManager);
         }
     }
 }

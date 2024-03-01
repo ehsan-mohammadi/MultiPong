@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0a3ada0151b84d45b6e0e58f8a49154, type: 3}
-  m_Name: ConfigurationMaster
+  m_Script: {fileID: 11500000, guid: 77cd7303badf5bb4c89889b2ebb9dfae, type: 3}
+  m_Name: NetworkFactoryConfiguration
   m_EditorClassIdentifier: 
-  configurations:
-  - {fileID: 11400000, guid: 02be577a8a6101548858871999d2f537, type: 2}
-  - {fileID: 11400000, guid: 7ba88ebcc660ad54689cc6b933734a03, type: 2}
+  networkRunner: {fileID: 5436247932366473292, guid: aa046ae20b3a5f843aabb86042da7083, type: 3}

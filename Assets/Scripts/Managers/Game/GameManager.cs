@@ -3,15 +3,12 @@ using UnityEngine;
 namespace MultiPong.Managers.Game
 {
     using Configurations;
-    using Presenters.Popups;
 
-    public class GameManager : MonoBehaviour
+    public class GameManager : MonoBehaviour, IManager
     {
         [SerializeField] private ConfigurationMaster configurationMaster;
         
         private GameInitializer initializer;
-
-        private TransitionManager TransitionManager => initializer.TransitionManager;
 
         private void Awake()
         {
@@ -30,11 +27,12 @@ namespace MultiPong.Managers.Game
             {
                 case GameState.Start:
                     Debug.Log("Switched GameState to Start.");
-                    TransitionManager.GoToMainMenu();
+                    GetManager<TransitionManager>().GoToMainMenu();
                     break;
                 case GameState.WaitingForOpponent:
                     Debug.Log("Switched GameState to WaitingForOpponent.");
-                    TransitionManager.GoToWaitingForOpponent();
+                    GetManager<TransitionManager>().GoToWaitingForOpponent();
+                    PreparingNetworkManager();
                     break;
                 case GameState.Play:
                     Debug.Log("Switched GameState to Play.");
@@ -46,5 +44,13 @@ namespace MultiPong.Managers.Game
                     break;
             }
         }
+
+        private void PreparingNetworkManager()
+        {
+            initializer.InitializeNetworkManager();
+            GetManager<NetworkManager>().Activate();
+        }
+
+        private T GetManager<T>() where T : IManager => initializer.Managers.Get<T>();
     }
 }

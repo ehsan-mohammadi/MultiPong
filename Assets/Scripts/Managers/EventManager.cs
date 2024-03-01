@@ -5,7 +5,7 @@ namespace MultiPong.Managers
     using Services;
     using Events;
 
-    public class EventManager: IService
+    public class EventManager: IManager, IService
     {
         private readonly List<IEventListener> listeners;
 

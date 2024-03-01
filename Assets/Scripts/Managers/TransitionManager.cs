@@ -3,7 +3,7 @@ namespace MultiPong.Managers
     using Services;
     using Handlers.Presentaions;
 
-    public class TransitionManager
+    public class TransitionManager : IManager
     {
         PopupManager PopupManager => ServiceLocator.Find<PopupManager>();
 

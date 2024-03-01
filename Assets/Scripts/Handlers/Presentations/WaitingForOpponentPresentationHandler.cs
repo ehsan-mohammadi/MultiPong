@@ -4,7 +4,7 @@ namespace MultiPong.Handlers.Presentaions
     using Services;
     using Presenters.Popups;
 
-    public class WaitingForOpponentPresentationHandler : IHandler
+    public class WaitingForOpponentPresentationHandler : IPresentationHandler
     {
         private PopupManager PopupManager => ServiceLocator.Find<PopupManager>();
 

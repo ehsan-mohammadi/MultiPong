@@ -1,23 +1,35 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using Fusion;
 using Fusion.Sockets;
 
 namespace MultiPong.Handlers.Network
 {
+    using Utilities;
+
     public class NetworkRunnerHandler : IHandler, INetworkRunnerCallbacks
     {
         private NetworkRunner networkRunner;
-        private Func<NetworkRunner> createNetworkRunner;
+        private NetworkSceneManagerDefault networkSceneManager;
 
-        public void Setup(Func<NetworkRunner> createNetworkRunner)
+        private Func<NetworkRunner> createNetworkRunner;
+        private Func<NetworkSceneManagerDefault> createNetworkSceneManager;
+
+        public void Setup(
+            Func<NetworkRunner> createNetworkRunner,
+            Func<NetworkSceneManagerDefault> createNetworkSceneManager
+        )
         {
             this.createNetworkRunner = createNetworkRunner;
+            this.createNetworkSceneManager = createNetworkSceneManager;
         }
 
         public void Activate()
         {
             networkRunner = createNetworkRunner.Invoke();
+            networkSceneManager = createNetworkSceneManager.Invoke();
+            StartGame(GameMode.AutoHostOrClient);
         }
 
         public void Deactivate()
@@ -98,6 +110,23 @@ namespace MultiPong.Handlers.Network
 
         public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message)
         {
+        }
+
+        private async void StartGame(GameMode mode)
+        {
+            networkRunner.ProvideInput = true;
+            var scene = SceneRef.FromIndex(
+                index: SceneManager.GetActiveScene().buildIndex
+            );
+
+            await networkRunner.StartGame(new StartGameArgs()
+                {
+                    GameMode = mode,
+                    SessionName = IdentificationUtility.GenerateSessionId(),
+                    Scene = scene,
+                    SceneManager = networkSceneManager
+                }
+            );
         }
     }
 }

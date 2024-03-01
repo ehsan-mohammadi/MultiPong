@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: NetworkFactoryConfiguration
   m_EditorClassIdentifier: 
   networkRunner: {fileID: 5436247932366473292, guid: aa046ae20b3a5f843aabb86042da7083, type: 3}
+  networkSceneManager: {fileID: 6350247509711461623, guid: f1681ef6621be1a4e862e6b76e9d24a2, type: 3}

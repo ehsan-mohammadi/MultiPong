@@ -43,7 +43,8 @@ namespace MultiPong.Managers
         private void SetupHandlers()
         {
             handlers.Get<NetworkRunnerHandler>().Setup(
-                createNetworkRunner: networkFactory.CreateNetworkRunner
+                createNetworkRunner: networkFactory.CreateNetworkRunner,
+                createNetworkSceneManager: networkFactory.CreateNetworkSceneManager
             );
         }
     }

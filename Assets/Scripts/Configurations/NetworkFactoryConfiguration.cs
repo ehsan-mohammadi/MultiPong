@@ -15,10 +15,11 @@ namespace MultiPong.Configurations
     public class NetworkFactoryConfiguration : BaseConfiguration<NetworkFactory>
     {
         [SerializeField] private NetworkRunner networkRunner;
+        [SerializeField] private NetworkSceneManagerDefault networkSceneManager;
 
         public override void Configure(NetworkFactory target)
         {
-            target.Setup(networkRunner);
+            target.Setup(networkRunner, networkSceneManager);
         }
     }
 }

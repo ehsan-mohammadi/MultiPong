@@ -36,6 +36,7 @@ namespace MultiPong.Managers.Game
                     break;
                 case GameState.Play:
                     Debug.Log("Switched GameState to Play.");
+                    GetManager<TransitionManager>().GoToPlay();
                     break;
                 case GameState.End:
                     Debug.Log("Switched GameState to End.");

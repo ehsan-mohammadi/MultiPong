@@ -23,6 +23,11 @@ namespace MultiPong.Managers
             waitingForOpponentPresentationHandler.OpenWaitingForOpponentPopup();
         }
 
+        public void GoToPlay()
+        {
+            CloseAllPopups();
+        }
+
         private void CloseAllPopups()
         {
             PopupManager.CloseAll();

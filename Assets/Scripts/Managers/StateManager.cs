@@ -34,8 +34,17 @@ namespace MultiPong.Managers
 
         public void OnEvent(IEvent evt, object sender)
         {
-            if (evt is PlayButtonClickedEvent)
-                GoToState(GameState.WaitingForOpponent);
+            switch(evt)
+            {
+                case PlayButtonClickedEvent:
+                    GoToState(GameState.WaitingForOpponent);
+                    break;
+                case AllPlayersJoinedEvent:
+                    GoToState(GameState.Play);
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void GoToState(GameState state) => GameState = state;

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using Fusion;
@@ -6,15 +7,22 @@ using Fusion.Sockets;
 
 namespace MultiPong.Handlers.Network
 {
-    using Utilities;
+    using Managers;
+    using Services;
+    using Events;
 
     public class NetworkRunnerHandler : IHandler, INetworkRunnerCallbacks
     {
+        private const int MAX_PLAYERS = 2;
+        private const string SESSION_NAME = "TestSession";
+
         private NetworkRunner networkRunner;
         private NetworkSceneManagerDefault networkSceneManager;
 
         private Func<NetworkRunner> createNetworkRunner;
         private Func<NetworkSceneManagerDefault> createNetworkSceneManager;
+
+        private EventManager EventManager => ServiceLocator.Find<EventManager>();
 
         public void Setup(
             Func<NetworkRunner> createNetworkRunner,
@@ -29,6 +37,8 @@ namespace MultiPong.Handlers.Network
         {
             networkRunner = createNetworkRunner.Invoke();
             networkSceneManager = createNetworkSceneManager.Invoke();
+            
+            AddNetworkRunnerCallbacks();
             StartGame(GameMode.AutoHostOrClient);
         }
 
@@ -78,10 +88,18 @@ namespace MultiPong.Handlers.Network
 
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
         {
+            UnityEngine.Debug.Log($"Player joined with id: {player.PlayerId}");
+
+            if (networkRunner.ActivePlayers.Count() == MAX_PLAYERS)
+                EventManager.Propagate(
+                    evt: new AllPlayersJoinedEvent(),
+                    sender: this
+                );
         }
 
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
         {
+           UnityEngine.Debug.Log($"Player left with id: {player.PlayerId}");
         }
 
         public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress)
@@ -112,6 +130,8 @@ namespace MultiPong.Handlers.Network
         {
         }
 
+        private void AddNetworkRunnerCallbacks() => networkRunner.AddCallbacks(this);
+
         private async void StartGame(GameMode mode)
         {
             networkRunner.ProvideInput = true;
@@ -119,12 +139,13 @@ namespace MultiPong.Handlers.Network
                 index: SceneManager.GetActiveScene().buildIndex
             );
 
-            await networkRunner.StartGame(new StartGameArgs()
-                {
+            await networkRunner.StartGame(
+                new StartGameArgs() {
                     GameMode = mode,
-                    SessionName = IdentificationUtility.GenerateSessionId(),
                     Scene = scene,
-                    SceneManager = networkSceneManager
+                    SceneManager = networkSceneManager,
+                    PlayerCount = MAX_PLAYERS,
+                    SessionName = SESSION_NAME
                 }
             );
         }

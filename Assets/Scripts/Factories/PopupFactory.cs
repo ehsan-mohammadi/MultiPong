@@ -9,14 +9,13 @@ namespace MultiPong.Factories
 
     public class PopupFactory : IFactory
     {
-        private const string TAG = "popup";
         private Container<BasePopup> popups;
 
         private Canvas Canvas => GameObject.FindObjectOfType<Canvas>();
 
         public PopupFactory()
         {
-            this.popups = new Container<BasePopup>(TAG);
+            this.popups = new Container<BasePopup>();
             ServiceLocator.Find<ConfigurerService>().Configure(this);
         }
 

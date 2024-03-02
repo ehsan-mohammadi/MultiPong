@@ -9,12 +9,11 @@ namespace MultiPong.Factories
 
     public class GameplayFactory : IFactory
     {
-        private const string TAG = "presenter";
         private Container<BaseGameplayPresenter> presenters;
 
         public GameplayFactory()
         {
-            this.presenters = new Container<BaseGameplayPresenter>(TAG);
+            this.presenters = new Container<BaseGameplayPresenter>();
             ServiceLocator.Find<ConfigurerService>().Configure(this);
         }
 

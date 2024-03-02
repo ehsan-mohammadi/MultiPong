@@ -9,9 +9,6 @@ namespace MultiPong.Managers.Game
 
     public class GameInitializer
     {
-        private const string MANAGER_TAG = "manager";
-        private const string UPDATEABLE_MANAGER_TAG = "updateableManager";
-
         private readonly GameManager gameManager;
         private readonly Container<IManager> managers;
         private readonly Container<IUpdateableManager> updateableManagers;
@@ -24,8 +21,8 @@ namespace MultiPong.Managers.Game
 
         public GameInitializer(GameManager gameManager, ConfigurationMaster configurationMaster)
         {
-            this.managers = new Container<IManager>(MANAGER_TAG);
-            this.updateableManagers = new Container<IUpdateableManager>(UPDATEABLE_MANAGER_TAG);
+            this.managers = new Container<IManager>();
+            this.updateableManagers = new Container<IUpdateableManager>();
 
             this.gameManager = gameManager;
             this.configurationMaster = configurationMaster;

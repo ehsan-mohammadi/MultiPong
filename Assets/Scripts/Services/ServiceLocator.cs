@@ -4,12 +4,11 @@ namespace MultiPong.Services
 
     public static class ServiceLocator
     {
-        private const string TAG = "service";
         private static Container<IService> services;
 
         public static void Initialize()
         {
-            services = new Container<IService>(TAG);
+            services = new Container<IService>();
         }
 
         public static void Register(IService service) => services.Add(service);

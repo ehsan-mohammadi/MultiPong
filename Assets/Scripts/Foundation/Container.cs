@@ -6,12 +6,10 @@ namespace MultiPong.Foundation
 {
     public class Container<T>
     {
-        private readonly string tag;
         private readonly Dictionary<Type, T> entities;
 
-        public Container(string tag)
+        public Container()
         {
-            this.tag = tag;
             this.entities = new Dictionary<Type, T>();
         }
 
@@ -31,7 +29,7 @@ namespace MultiPong.Foundation
 
             if (IsExists())
                 return (TEntity)entities[type];
-            throw new Exception($"The {tag} of type '{type}' does not found.");
+            throw new Exception($"The {typeof(T).Name} of type '{type}' does not found.");
 
             bool IsExists() => entities.ContainsKey(type);
         }

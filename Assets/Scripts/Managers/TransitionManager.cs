@@ -7,6 +7,14 @@ namespace MultiPong.Managers
     {
         PopupManager PopupManager => ServiceLocator.Find<PopupManager>();
 
+        public void Activate()
+        {
+        }
+
+        public void Deactivate()
+        {
+        }
+
         public void GoToMainMenu()
         {
             CloseAllPopups();

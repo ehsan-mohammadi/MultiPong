@@ -12,7 +12,16 @@ namespace MultiPong.Managers
         public EventManager()
         {
             this.listeners = new List<IEventListener>();
+        }
+
+        public void Activate()
+        {
             ServiceLocator.Register(this);
+        }
+
+        public void Deactivate()
+        {
+            ServiceLocator.Unregister(this);
         }
 
         public void Register(IEventListener listener)

@@ -1,51 +1,74 @@
+using System.Collections.Generic;
+
 namespace MultiPong.Managers.Game
 {
     using Foundation;
     using Managers;
-    using Managers.Gameplay;
     using Services;
-    using Factories;
     using Configurations;
 
     public class GameInitializer
     {
-        private const string TAG = "manager";
+        private const string MANAGER_TAG = "manager";
+        private const string UPDATEABLE_MANAGER_TAG = "updateableManager";
+
         private readonly GameManager gameManager;
         private readonly Container<IManager> managers;
+        private readonly Container<IUpdateableManager> updateableManagers;
         private readonly ConfigurationMaster configurationMaster;
         
         private ConfigurerService configurerService;
+        
         internal Container<IManager> Managers => managers;
+        internal IEnumerable<IUpdateableManager> UpdateableManagers => updateableManagers.GetAll();
 
         public GameInitializer(GameManager gameManager, ConfigurationMaster configurationMaster)
         {
+            this.managers = new Container<IManager>(MANAGER_TAG);
+            this.updateableManagers = new Container<IUpdateableManager>(UPDATEABLE_MANAGER_TAG);
+
             this.gameManager = gameManager;
-            this.managers = new Container<IManager>(TAG);
             this.configurationMaster = configurationMaster;
         }
 
         public void Initialize()
         {
-            InitializeServiceLocator();
-            InitializeConfigurationService();
-            InitializeEventManager();
-            InitializePopupManager();
-            InitializeTransitionManager();
-            InitializeStateManager();
+            InitializeRootServices();
+            InitializeRootManagers();
+            ActivateRootManagers();
+
+            void InitializeRootServices()
+            {
+                InitializeServiceLocator();
+                InitializeConfigurationService();
+            }
+
+            void InitializeRootManagers()
+            {
+                InitializeEventManager();
+                InitializePopupManager();
+                InitializeTransitionManager();
+                InitializeStateManager();
+            }
+
+            void ActivateRootManagers()
+            {
+                foreach(var manager in managers.GetAll())
+                    ActivateManager(manager);
+            }
         }
 
-        public void InitializeNetworkManager()
+        internal void AddManager(IManager manager)
         {
-            var networkManager = new NetworkManager();
-            networkManager.Setup(new NetworkFactory());
-            managers.Add(networkManager);
+            managers.Add(manager);
+
+            if (manager is IUpdateableManager)
+                updateableManagers.Add(manager as IUpdateableManager);
         }
 
-        public void InitializeGameplayManager()
+        internal void ActivateManager(IManager manager)
         {
-            var gameplayManager = new GameplayManager();
-            gameplayManager.Initialize();
-            managers.Add(gameplayManager);
+            manager.Activate();
         }
 
         private void InitializeServiceLocator()
@@ -62,27 +85,27 @@ namespace MultiPong.Managers.Game
 
         private void InitializeEventManager()
         {
-            managers.Add(new EventManager());
+            var eventManager = new EventManager();
+            AddManager(eventManager);
         }
 
         private void InitializePopupManager()
         {
             var popupManager = new PopupManager();
-            popupManager.Setup(new PopupFactory());
-            managers.Add(popupManager);
+            AddManager(popupManager);
         }
 
         private void InitializeTransitionManager()
         {
-            managers.Add(new TransitionManager());
+            var transitionManager = new TransitionManager();
+            AddManager(transitionManager);
         }
 
         private void InitializeStateManager()
         {
             var stateManager = new StateManager();
             stateManager.Setup(gameManager.PrepareForState);
-            stateManager.GoToState(GameState.Start);
-            managers.Add(stateManager);
+            AddManager(stateManager);
         }
     }
 }

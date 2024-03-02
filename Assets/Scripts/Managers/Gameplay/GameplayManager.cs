@@ -1,16 +1,28 @@
 namespace MultiPong.Managers.Gameplay
 {
-    public class GameplayManager : IManager
+    public class GameplayManager : IUpdateableManager
     {
-        private GameplayInitializer initializer;
+        private readonly GameplayInitializer initializer;
 
-        public void Initialize()
+        public GameplayManager()
         {
             initializer = new GameplayInitializer();
             initializer.Initialize();
         }
 
         public void Activate()
+        {
+        }
+
+        public void Deactivate()
+        {
+        }
+
+        public void Update()
+        {
+        }
+
+        public void FixedUpdate()
         {
         }
     }

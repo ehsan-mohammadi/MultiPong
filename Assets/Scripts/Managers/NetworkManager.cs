@@ -16,7 +16,8 @@ namespace MultiPong.Managers
         private const int MAX_PLAYERS = 2;
         private const string SESSION_NAME = "TestSession";
 
-        private NetworkFactory networkFactory;
+        private readonly NetworkFactory networkFactory;
+        
         private NetworkRunner networkRunner;
         private NetworkSceneManagerDefault networkSceneManager;
 
@@ -24,12 +25,8 @@ namespace MultiPong.Managers
 
         public NetworkManager()
         {
+            this.networkFactory = new NetworkFactory();
             ServiceLocator.Register(this);
-        }
-
-        public void Setup(NetworkFactory networkFactory)
-        {
-            this.networkFactory = networkFactory;
         }
 
         public void Activate()

@@ -29,7 +29,16 @@ namespace MultiPong.Managers
         public void Setup(Action<GameState> onStateChanged)
         {
             this.onStateChanged = onStateChanged;
+        }
+
+        public void Activate()
+        {
             ServiceLocator.Find<EventManager>().Register(this);
+        }
+
+        public void Deactivate()
+        {
+            ServiceLocator.Find<EventManager>().Unregister(this);
         }
 
         public void OnEvent(IEvent evt, object sender)

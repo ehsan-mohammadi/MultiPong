@@ -8,16 +8,21 @@ namespace MultiPong.Managers
 
     public class PopupManager : IManager, IService
     {
-        private PopupFactory popupFactory;
+        private readonly PopupFactory popupFactory;
 
         public PopupManager()
+        {
+            this.popupFactory = new PopupFactory();
+        }
+
+        public void Activate()
         {
             ServiceLocator.Register(this);
         }
 
-        public void Setup(PopupFactory popupFactory)
+        public void Deactivate()
         {
-            this.popupFactory = popupFactory;
+            ServiceLocator.Unregister(this);
         }
 
         public T OpenPopup<T>() where T : BasePopup => popupFactory.CreatePopup<T>();

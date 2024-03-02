@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MultiPong.Managers.Game
@@ -5,7 +6,7 @@ namespace MultiPong.Managers.Game
     using Managers.Gameplay;
     using Configurations;
 
-    public class GameManager : MonoBehaviour, IManager
+    public class GameManager : MonoBehaviour
     {
         [SerializeField] private ConfigurationMaster configurationMaster;
         
@@ -14,12 +15,30 @@ namespace MultiPong.Managers.Game
         private void Awake()
         {
             Initialize();
+            GotoStartState();
+        }
+
+        private void Update()
+        {
+            foreach(var updateableManager in GetUpdateableManagers())
+                updateableManager.Update();
+        }
+
+        private void FixedUpdate()
+        {
+            foreach(var updateableManager in GetUpdateableManagers())
+                updateableManager.FixedUpdate();
         }
 
         private void Initialize()
         {
             initializer = new GameInitializer(this, configurationMaster);
             initializer.Initialize();
+        }
+
+        private void GotoStartState()
+        {
+            GetManager<StateManager>().GoToState(GameState.Start);
         }
 
         internal void PrepareForState(GameState state)
@@ -50,16 +69,24 @@ namespace MultiPong.Managers.Game
 
         private void PreparingNetworkManager()
         {
-            initializer.InitializeNetworkManager();
-            GetManager<NetworkManager>().Activate();
+            var networkManager = new NetworkManager();
+            AddManager(networkManager);
+            ActivateManager(networkManager);
         }
 
         private void PreparingGameplayManager()
         {
-            initializer.InitializeGameplayManager();
-            GetManager<GameplayManager>().Activate();
+            var gameplayManager = new GameplayManager();
+            AddManager(gameplayManager);
+            ActivateManager(gameplayManager);
         }
 
         private T GetManager<T>() where T : IManager => initializer.Managers.Get<T>();
+
+        private IEnumerable<IUpdateableManager> GetUpdateableManagers() => initializer.UpdateableManagers;
+        
+        private void AddManager(IManager manager) => initializer.AddManager(manager);
+
+        private void ActivateManager(IManager manager) => initializer.ActivateManager(manager);
     }
 }

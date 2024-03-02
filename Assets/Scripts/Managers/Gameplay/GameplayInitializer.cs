@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace MultiPong.Managers.Gameplay
 {
     using Foundation;
@@ -6,13 +8,18 @@ namespace MultiPong.Managers.Gameplay
 
     public class GameplayInitializer
     {
-        private const string TAG = "system";
-        private readonly Container<BaseSystem> systems;
+        private readonly Container<ISystem> systems;
+        private readonly Container<IUpdateableSystem> updateableSystems;
+
+        internal IEnumerable<ISystem> Systems => systems.GetAll();
+        internal IEnumerable<IUpdateableSystem> UpdateableSystems => updateableSystems.GetAll();
+
         private GameplayFactory gameplayFactory;
 
         public GameplayInitializer()
         {
-            this.systems = new Container<BaseSystem>(TAG);
+            this.systems = new Container<ISystem>();
+            this.updateableSystems = new Container<IUpdateableSystem>();
         }
 
         public void Initialize()

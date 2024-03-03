@@ -1,17 +1,19 @@
+using System;
+using System.Collections.Generic;
+
 namespace MultiPong.Systems.Gameplay
 {
-    using Foundation;
     using Managers.Gameplay;
     using Services;
     using Data;
 
     public class BlackboardSystem : GameplaySystem, ISystem, IService
     {
-        private readonly Container<IBlackboardData> dataCollection;
+        private readonly Dictionary<Type, IBlackboardData> dataCollection;
 
         public BlackboardSystem(GameplayManager gameplayManager) : base(gameplayManager)
         {
-            this.dataCollection = new Container<IBlackboardData>();
+            this.dataCollection = new Dictionary<Type, IBlackboardData>();
         }
         
         public void Activate()
@@ -26,18 +28,17 @@ namespace MultiPong.Systems.Gameplay
 
         public void AddData<T>(T data) where T : IBlackboardData
         {
-            dataCollection.Add(data);
+            dataCollection.Add(data.GetType(), data);
         }
 
-        public void UpdateDta<T>(T updatedData) where T : IBlackboardData
+        public void UpdateData<T>(T updatedData) where T : IBlackboardData
         {
-            var outdatedData = dataCollection.Get<T>();
-            outdatedData = updatedData;
+            dataCollection[updatedData.GetType()] = updatedData;
         }
 
         public T GetData<T>() where T : IBlackboardData
         {
-            return dataCollection.Get<T>();
+            return (T)dataCollection[typeof(T)];
         }
     }
 }

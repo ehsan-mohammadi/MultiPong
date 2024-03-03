@@ -3,7 +3,6 @@ using UnityEngine;
 namespace MultiPong.Systems.Gameplay
 {
     using Managers.Gameplay;
-    using Services;
     using Data;
 
     public class InputSystem : GameplaySystem, IUpdateableSystem
@@ -28,8 +27,6 @@ namespace MultiPong.Systems.Gameplay
         {
             inputData.Movement = Input.GetAxis("Vertical");
             UpdateBlackBoardData(inputData);
-
-            Debug.Log("UPDATED: " + GetBlackBoardData<NetworkInputData>().Movement);
         }
 
         public void FixedUpdate()

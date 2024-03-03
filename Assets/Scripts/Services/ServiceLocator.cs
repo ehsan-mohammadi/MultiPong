@@ -15,6 +15,14 @@ namespace MultiPong.Services
 
         public static void Unregister(IService service) => services.Remove(service);
 
-        public static T Find<T>() where T : IService => services.Get<T>();
+        public static T Find<T>() where T : IService
+        {
+            var type = typeof(T);
+
+            if (services.IsExists(type))
+                return services.Get<T>();
+            
+            return default;
+        }
     }
 }

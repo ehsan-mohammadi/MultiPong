@@ -9,7 +9,9 @@ namespace MultiPong.Managers
 {
     using Factories;
     using Services;
+    using Systems.Gameplay;
     using Events;
+    using Data;
 
     public class NetworkManager : IManager, IService, INetworkRunnerCallbacks
     {
@@ -23,6 +25,7 @@ namespace MultiPong.Managers
         private NetworkSceneManagerDefault networkSceneManager;
 
         private EventManager EventManager => ServiceLocator.Find<EventManager>();
+        private BlackboardSystem BlackboardSystem => ServiceLocator.Find<BlackboardSystem>();
 
         public List<PlayerRef> Players => players.OrderBy(player => player.PlayerId).ToList();
         public NetworkRunner NetworkRunner => networkRunner;
@@ -73,6 +76,10 @@ namespace MultiPong.Managers
 
         public void OnInput(NetworkRunner runner, NetworkInput input)
         {
+            if (BlackboardSystem == default)
+                return;
+            
+            input.Set(BlackboardSystem.GetData<NetworkInputData>());
         }
 
         public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)

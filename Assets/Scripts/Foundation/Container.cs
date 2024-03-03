@@ -20,18 +20,21 @@ namespace MultiPong.Foundation
 
         public void Remove(T entity)
         {
-            entities.Remove(entities.GetType());
+            entities.Remove(entity.GetType());
+        }
+
+        public bool IsExists(Type type)
+        {
+            return entities.ContainsKey(type);
         }
 
         public TEntity Get<TEntity>() where TEntity : T
         {
             Type type = typeof(TEntity);
 
-            if (IsExists())
+            if (IsExists(type))
                 return (TEntity)entities[type];
             throw new Exception($"The {typeof(T).Name} of type '{type}' does not found.");
-
-            bool IsExists() => entities.ContainsKey(type);
         }
 
         public IEnumerable<T> GetAll()

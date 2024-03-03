@@ -24,7 +24,7 @@ namespace MultiPong.Systems.Gameplay
 
         protected void UpdateBlackBoardData<T>(T updatedData) where T : IBlackboardData
         {
-            gameplayManager.GetSystem<BlackboardSystem>().UpdateDta(updatedData);
+            gameplayManager.GetSystem<BlackboardSystem>().UpdateData(updatedData);
         }
     }
 }

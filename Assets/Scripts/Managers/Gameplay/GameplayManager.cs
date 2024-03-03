@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 
 namespace MultiPong.Managers.Gameplay
@@ -10,7 +11,7 @@ namespace MultiPong.Managers.Gameplay
 
         public GameplayManager()
         {
-            initializer = new GameplayInitializer();
+            initializer = new GameplayInitializer(this);
             initializer.Initialize();
         }
 
@@ -38,8 +39,10 @@ namespace MultiPong.Managers.Gameplay
                 updateableSystem.FixedUpdate();
         }
 
-        private IEnumerable<ISystem> GetSystems() => initializer.Systems;
+        public T GetSystem<T>() where T : ISystem => initializer.Systems.Get<T>();
 
-        private IEnumerable<IUpdateableSystem> GetUpdateableSystems() =>initializer.UpdateableSystems;
+        private IEnumerable<ISystem> GetSystems() => initializer.Systems.GetAll();
+
+        private IEnumerable<IUpdateableSystem> GetUpdateableSystems() => initializer.UpdateableSystems;
     }
 }

@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Fusion;
 
 namespace MultiPong.Configurations
 {
     using Factories;
-    using Presenters.Gameplay;
     using Values;
 
     [CreateAssetMenu(
@@ -14,7 +12,7 @@ namespace MultiPong.Configurations
     )]
     public class GameplayFactoryConfiguration : BaseConfiguration<GameplayFactory>
     {
-        [SerializeField] private List<BaseGameplayPresenter> presenters;
+        [SerializeField] private List<MonoBehaviour> presenters;
 
         public override void Configure(GameplayFactory target)
         {

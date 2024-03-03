@@ -17,15 +17,20 @@ namespace MultiPong.Managers
         private const string SESSION_NAME = "TestSession";
 
         private readonly NetworkFactory networkFactory;
+        private readonly List<PlayerRef> players;
         
         private NetworkRunner networkRunner;
         private NetworkSceneManagerDefault networkSceneManager;
 
         private EventManager EventManager => ServiceLocator.Find<EventManager>();
 
+        public List<PlayerRef> Players => players.OrderBy(player => player.PlayerId).ToList();
+        public NetworkRunner NetworkRunner => networkRunner;
+
         public NetworkManager()
         {
             this.networkFactory = new NetworkFactory();
+            this.players = new List<PlayerRef>();
             ServiceLocator.Register(this);
         }
 
@@ -85,8 +90,9 @@ namespace MultiPong.Managers
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
         {
             UnityEngine.Debug.Log($"Player joined with id: {player.PlayerId}");
+            players.Add(player);
 
-            if (networkRunner.ActivePlayers.Count() == MAX_PLAYERS)
+            if (players.Count == MAX_PLAYERS)
                 EventManager.Propagate(
                     evt: new AllPlayersJoinedEvent(),
                     sender: this
@@ -96,6 +102,7 @@ namespace MultiPong.Managers
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
         {
            UnityEngine.Debug.Log($"Player left with id: {player.PlayerId}");
+           players.Remove(player);
         }
 
         public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress)

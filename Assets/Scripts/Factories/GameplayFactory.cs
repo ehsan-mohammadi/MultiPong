@@ -1,32 +1,48 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Fusion;
 
 namespace MultiPong.Factories
 {
     using Foundation;
+    using Managers;
     using Services;
-    using Presenters.Gameplay;
 
     public class GameplayFactory : IFactory
     {
-        private Container<BaseGameplayPresenter> presenters;
+        private readonly Container<MonoBehaviour> presenters;
 
         public GameplayFactory()
         {
-            this.presenters = new Container<BaseGameplayPresenter>();
+            this.presenters = new Container<MonoBehaviour>();
             ServiceLocator.Find<ConfigurerService>().Configure(this);
         }
 
-        public void Setup(List<BaseGameplayPresenter> presenters)
+        public void Setup(List<MonoBehaviour> presenters)
         {
             foreach(var presenter in presenters)
                 this.presenters.Add(presenter);
         }
 
-        public T CreatePresenter<T>() where T : BaseGameplayPresenter
+        public T CreatePresenter<T>() where T : MonoBehaviour
         {
             var presenter = presenters.Get<T>();
             return Object.Instantiate(presenter);
+        }
+
+        public T SpawnNetworkPresenter<T>(
+            NetworkRunner networkRunner,
+            Vector2 position,
+            PlayerRef player
+        ) where T : NetworkBehaviour
+        {
+            var presenter = presenters.Get<T>();
+            return networkRunner.Spawn(
+                prefab: presenter,
+                position: position,
+                rotation: Quaternion.identity,
+                inputAuthority: player
+            );
         }
     }
 }

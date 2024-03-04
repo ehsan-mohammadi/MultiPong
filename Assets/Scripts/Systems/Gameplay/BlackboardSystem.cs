@@ -11,17 +11,18 @@ namespace MultiPong.Systems.Gameplay
     {
         private readonly Dictionary<Type, IBlackboardData> dataCollection;
 
-        public BlackboardSystem(GameplayManager gameplayManager) : base(gameplayManager)
+        public BlackboardSystem(GameplayManager gameplayManager, ActivationMode activationMode)
+            : base(gameplayManager, activationMode)
         {
             this.dataCollection = new Dictionary<Type, IBlackboardData>();
         }
         
-        public void Activate()
+        public override void Activate()
         {
             ServiceLocator.Register(this);
         }
 
-        public void Deactivate()
+        public override void Deactivate()
         {
             ServiceLocator.Unregister(this);
         }

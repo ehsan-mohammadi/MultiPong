@@ -5,7 +5,6 @@ using Fusion;
 namespace MultiPong.Factories
 {
     using Foundation;
-    using Managers;
     using Services;
 
     public class GameplayFactory : IFactory
@@ -42,6 +41,19 @@ namespace MultiPong.Factories
                 position: position,
                 rotation: Quaternion.identity,
                 inputAuthority: player
+            );
+        }
+
+        public T SpawnNetworkPresenter<T>(
+            NetworkRunner networkRunner,
+            Vector2 position
+        ) where T : NetworkBehaviour
+        {
+            var presenter = presenters.Get<T>();
+            return networkRunner.Spawn(
+                prefab: presenter,
+                position: position,
+                rotation: Quaternion.identity
             );
         }
     }

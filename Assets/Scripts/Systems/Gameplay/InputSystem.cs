@@ -9,17 +9,18 @@ namespace MultiPong.Systems.Gameplay
     {
         private NetworkInputData inputData;
 
-        public InputSystem(GameplayManager gameplayManager) : base(gameplayManager)
+        public InputSystem(GameplayManager gameplayManager, ActivationMode activationMode)
+            : base(gameplayManager, activationMode)
         {
             this.inputData = new NetworkInputData();
         }
 
-        public void Activate()
+        public override void Activate()
         {
             AddBlackBoardData(inputData);
         }
 
-        public void Deactivate()
+        public override void Deactivate()
         {
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 namespace MultiPong.Managers.Gameplay
 {
     using Systems;
+    using Systems.Gameplay;
 
     public class GameplayManager : IUpdateableManager
     {
@@ -38,9 +39,9 @@ namespace MultiPong.Managers.Gameplay
                 updateableSystem.FixedUpdate();
         }
 
-        public T GetSystem<T>() where T : ISystem => initializer.Systems.Get<T>();
+        public T GetSystem<T>() where T : GameplaySystem => initializer.Systems.Get<T>();
 
-        private IEnumerable<ISystem> GetSystems() => initializer.Systems.GetAll();
+        private IEnumerable<GameplaySystem> GetSystems() => initializer.Systems.GetAll();
 
         private IEnumerable<IUpdateableSystem> GetUpdateableSystems() => initializer.UpdateableSystems;
     }

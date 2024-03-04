@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace MultiPong.Systems.Gameplay
 {
     using Managers;
@@ -15,17 +17,15 @@ namespace MultiPong.Systems.Gameplay
 
         private GameplaySettingsData GameplaySettings => GameSettings.Instance.Gameplay;
 
-        public SpawnerSystem(GameplayManager gameplayManager) : base(gameplayManager)
+        public SpawnerSystem(GameplayManager gameplayManager, ActivationMode activationMode)
+            : base(gameplayManager, activationMode)
         {
             this.gameplayFactory = new GameplayFactory();
             this.networkManager = ServiceLocator.Find<NetworkManager>();
         }
 
-        public void Activate()
+        public override void Activate()
         {
-            if (!IsCalledFromServer())
-                return;
-            
             for (int i = 0; i < GameplaySettings.SpawnPositions.Count; i++)
             {
                 gameplayFactory.SpawnNetworkPresenter<PaddlePresenter>(
@@ -35,10 +35,13 @@ namespace MultiPong.Systems.Gameplay
                 );
             }
 
-            bool IsCalledFromServer() => networkManager.NetworkRunner.IsServer;
+            gameplayFactory.SpawnNetworkPresenter<BallPresenter>(
+                networkRunner: networkManager.NetworkRunner,
+                position: Vector2.zero
+            );
         }
 
-        public void Deactivate()
+        public override void Deactivate()
         {
         }
     }

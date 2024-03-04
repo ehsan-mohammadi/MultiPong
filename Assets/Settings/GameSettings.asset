@@ -17,7 +17,7 @@ MonoBehaviour:
     maxPlayers: 2
   gameplay:
     spawnPositions:
-    - {x: -4, y: 0}
-    - {x: 4, y: 0}
-    paddleSpeed: 4
+    - {x: -6, y: 0}
+    - {x: 6, y: 0}
+    paddleSpeed: 8
     ballSpeed: 8

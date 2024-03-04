@@ -4,12 +4,16 @@ namespace MultiPong.Systems.Gameplay
     using Managers.Gameplay;
     using Services;
     using Factories;
+    using Settings;
     using Presenters.Gameplay;
+    using Data.Settings;
 
     public class SpawnerSystem : GameplaySystem, ISystem
     {
         private readonly GameplayFactory gameplayFactory;
         private readonly NetworkManager networkManager;
+
+        private GameplaySettingsData GameplaySettings => GameSettings.Instance.Gameplay;
 
         public SpawnerSystem(GameplayManager gameplayManager) : base(gameplayManager)
         {
@@ -21,17 +25,12 @@ namespace MultiPong.Systems.Gameplay
         {
             if (!IsCalledFromServer())
                 return;
-
-            var validPositions = new System.Collections.Generic.List<UnityEngine.Vector2>() {
-                new UnityEngine.Vector2(-2, 0),
-                new UnityEngine.Vector2(2, 0)
-            };
             
-            for (int i = 0; i < validPositions.Count; i++)
+            for (int i = 0; i < GameplaySettings.SpawnPositions.Count; i++)
             {
                 gameplayFactory.SpawnNetworkPresenter<PaddlePresenter>(
                     networkRunner: networkManager.NetworkRunner,
-                    position: validPositions[i],
+                    position: GameplaySettings.SpawnPositions[i],
                     player: networkManager.Players[i]
                 );
             }

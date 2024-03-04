@@ -11,13 +11,12 @@ namespace MultiPong.Managers
     using Services;
     using Systems.Gameplay;
     using Events;
+    using Settings;
     using Data;
+    using Data.Settings;
 
     public class NetworkManager : IManager, IService, INetworkRunnerCallbacks
     {
-        private const int MAX_PLAYERS = 2;
-        private const string SESSION_NAME = "TestSession";
-
         private readonly NetworkFactory networkFactory;
         private readonly List<PlayerRef> players;
         
@@ -26,6 +25,7 @@ namespace MultiPong.Managers
 
         private EventManager EventManager => ServiceLocator.Find<EventManager>();
         private BlackboardSystem BlackboardSystem => ServiceLocator.Find<BlackboardSystem>();
+        private NetworkSettingsData NetworkSettings => GameSettings.Instance.Network;
 
         public List<PlayerRef> Players => players.OrderBy(player => player.PlayerId).ToList();
         public NetworkRunner NetworkRunner => networkRunner;
@@ -99,7 +99,7 @@ namespace MultiPong.Managers
             UnityEngine.Debug.Log($"Player joined with id: {player.PlayerId}");
             players.Add(player);
 
-            if (players.Count == MAX_PLAYERS)
+            if (players.Count == NetworkSettings.MaxPlayers)
                 EventManager.Propagate(
                     evt: new AllPlayersJoinedEvent(),
                     sender: this
@@ -154,8 +154,8 @@ namespace MultiPong.Managers
                     GameMode = mode,
                     Scene = scene,
                     SceneManager = networkSceneManager,
-                    PlayerCount = MAX_PLAYERS,
-                    SessionName = SESSION_NAME
+                    PlayerCount = NetworkSettings.MaxPlayers,
+                    SessionName = NetworkSettings.SessionName
                 }
             );
         }

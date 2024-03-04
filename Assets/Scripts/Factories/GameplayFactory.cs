@@ -23,12 +23,6 @@ namespace MultiPong.Factories
                 this.presenters.Add(presenter);
         }
 
-        public T CreatePresenter<T>() where T : MonoBehaviour
-        {
-            var presenter = presenters.Get<T>();
-            return Object.Instantiate(presenter);
-        }
-
         public T SpawnNetworkPresenter<T>(
             NetworkRunner networkRunner,
             Vector2 position,

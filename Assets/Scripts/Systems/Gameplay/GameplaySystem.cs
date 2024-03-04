@@ -7,7 +7,7 @@ namespace MultiPong.Systems.Gameplay
 
     public abstract class GameplaySystem : ISystem
     {
-        private GameplayManager gameplayManager;
+        protected GameplayManager gameplayManager;
         private ActivationMode activationMode;
 
         public ActivationMode ActivationMode => activationMode;
@@ -21,6 +21,11 @@ namespace MultiPong.Systems.Gameplay
         public abstract void Activate();
 
         public abstract void Deactivate();
+
+        protected T GetSystem<T>() where T : GameplaySystem
+        {
+            return gameplayManager.GetSystem<T>();
+        }
 
         protected void AddBlackBoardData<T>(T data) where T : IBlackboardData
         {

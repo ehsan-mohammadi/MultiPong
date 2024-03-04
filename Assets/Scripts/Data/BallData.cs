@@ -1,9 +1,14 @@
-using UnityEngine;
-
 namespace MultiPong.Data
 {
+    using Presenters.Gameplay;
+
     public class BallData : IBlackboardData
     {
-        public Vector2 Direction { get; set; }
+        public BallPresenter Presenter { get; set; }
+
+        public BallData(BallPresenter presenter)
+        {
+            this.Presenter = presenter;
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace MultiPong.Systems.Gameplay
     using Factories;
     using Settings;
     using Presenters.Gameplay;
+    using Data;
     using Data.Settings;
 
     public class SpawnerSystem : GameplaySystem, ISystem
@@ -26,6 +27,25 @@ namespace MultiPong.Systems.Gameplay
 
         public override void Activate()
         {
+            SpawnEnvironmentPresenter();
+            SpawnPaddlePresenters();
+            SpawnBallPresenter();
+        }
+
+        public override void Deactivate()
+        {
+        }
+
+        private void SpawnEnvironmentPresenter()
+        {
+            gameplayFactory.SpawnNetworkPresenter<EnvironmentPresenter>(
+                networkRunner: networkManager.NetworkRunner,
+                position: Vector2.zero
+            );
+        }
+
+        private void SpawnPaddlePresenters()
+        {
             for (int i = 0; i < GameplaySettings.SpawnPositions.Count; i++)
             {
                 gameplayFactory.SpawnNetworkPresenter<PaddlePresenter>(
@@ -34,15 +54,16 @@ namespace MultiPong.Systems.Gameplay
                     player: networkManager.Players[i]
                 );
             }
+        }
 
-            gameplayFactory.SpawnNetworkPresenter<BallPresenter>(
+        private void SpawnBallPresenter()
+        {
+            var ballPresenter = gameplayFactory.SpawnNetworkPresenter<BallPresenter>(
                 networkRunner: networkManager.NetworkRunner,
                 position: Vector2.zero
             );
-        }
 
-        public override void Deactivate()
-        {
+            AddBlackBoardData(new BallData(ballPresenter));
         }
     }
 }

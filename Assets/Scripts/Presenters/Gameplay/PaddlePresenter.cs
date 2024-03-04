@@ -18,6 +18,7 @@ namespace MultiPong.Presenters.Gameplay
 
         public override void Spawned()
         {
+            this.rigidbody = GetComponent<Rigidbody2D>();
             this.speed = GameplaySettings.PaddleSpeed;
         }
 
@@ -25,11 +26,6 @@ namespace MultiPong.Presenters.Gameplay
         {
             if (IsLocalPlayer())
                 Runner.Despawn(Object);
-        }
-
-        private void Awake()
-        {
-            this.rigidbody = GetComponent<Rigidbody2D>();
         }
 
         public override void FixedUpdateNetwork()

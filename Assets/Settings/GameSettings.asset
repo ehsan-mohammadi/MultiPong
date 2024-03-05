@@ -16,7 +16,7 @@ MonoBehaviour:
     sessionName: Test Session
     maxPlayers: 2
   gameplay:
-    gameTime: 10
+    gameTime: 180
     spawnPositions:
     - {x: -6, y: 0}
     - {x: 6, y: 0}

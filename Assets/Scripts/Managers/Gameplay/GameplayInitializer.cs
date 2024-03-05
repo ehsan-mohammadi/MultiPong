@@ -37,6 +37,7 @@ namespace MultiPong.Managers.Gameplay
         {
             AddSystem(new BlackboardSystem(gameplayManager, ActivationMode.General));
             AddSystem(new InputSystem(gameplayManager, ActivationMode.General));
+            AddSystem(new HUDSystem(gameplayManager, ActivationMode.ServerOnly));
             AddSystem(new SpawnerSystem(gameplayManager, ActivationMode.ServerOnly));
             AddSystem(new BallSystem(gameplayManager, ActivationMode.ServerOnly));
         }

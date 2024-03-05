@@ -7,7 +7,7 @@ namespace MultiPong.Systems.Gameplay
     using Services;
     using Data;
 
-    public class BlackboardSystem : GameplaySystem, ISystem, IService
+    public class BlackboardSystem : GameplaySystem, IService
     {
         private readonly Dictionary<Type, IBlackboardData> dataCollection;
 

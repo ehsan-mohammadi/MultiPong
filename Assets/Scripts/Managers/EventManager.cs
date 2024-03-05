@@ -39,7 +39,7 @@ namespace MultiPong.Managers
 
         public void Propagate(IEvent evt, object sender)
         {
-            foreach(var listener in listeners)
+            foreach(var listener in listeners.ToArray())
                 listener.OnEvent(evt, sender);
         }
     }

@@ -11,7 +11,7 @@ namespace MultiPong.Systems.Gameplay
     using Data;
     using Data.Settings;
 
-    public class SpawnerSystem : GameplaySystem, ISystem
+    public class SpawnerSystem : GameplaySystem
     {
         private readonly GameplayFactory gameplayFactory;
         private readonly NetworkManager networkManager;
@@ -28,6 +28,7 @@ namespace MultiPong.Systems.Gameplay
         public override void Activate()
         {
             SpawnEnvironmentPresenter();
+            SpawnHUDPresenter();
             SpawnPaddlePresenters();
             SpawnBallPresenter();
         }
@@ -39,6 +40,14 @@ namespace MultiPong.Systems.Gameplay
         private void SpawnEnvironmentPresenter()
         {
             gameplayFactory.SpawnNetworkPresenter<EnvironmentPresenter>(
+                networkRunner: networkManager.NetworkRunner,
+                position: Vector2.zero
+            );
+        }
+
+        private void SpawnHUDPresenter()
+        {
+            gameplayFactory.SpawnNetworkPresenter<HUDPresenter>(
                 networkRunner: networkManager.NetworkRunner,
                 position: Vector2.zero
             );

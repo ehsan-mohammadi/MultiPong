@@ -48,6 +48,7 @@ namespace MultiPong.Managers
 
         public void Deactivate()
         {
+            ServiceLocator.Unregister(this);
         }
 
         public void OnConnectedToServer(NetworkRunner runner)

@@ -54,6 +54,9 @@ namespace MultiPong.Managers
                 case GameOverEvent:
                     GoToState(GameState.End);
                     break;
+                case RestartButtonClickedEvent:
+                    GoToState(GameState.Start);
+                    break;
                 default:
                     break;
             }

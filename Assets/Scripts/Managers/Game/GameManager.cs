@@ -91,6 +91,7 @@ namespace MultiPong.Managers.Game
 
             CollectNetworkPresenters();
             DeactivateGameplayManager();
+            DeactivateNetworkManager();
             RemoveNetworkRunnerCallbacks();
             ShutdownNetworkManager();
             RemoveNeededManagers();
@@ -99,6 +100,8 @@ namespace MultiPong.Managers.Game
             void CollectNetworkPresenters() => collectorManager.CollectNetworkPresenters();
 
             void DeactivateGameplayManager() => gameplayManager.Deactivate();
+
+            void DeactivateNetworkManager() => networkManager.Deactivate();
 
             void RemoveNetworkRunnerCallbacks() => networkManager.RemoveNetworkRunnerCallbacks();
 

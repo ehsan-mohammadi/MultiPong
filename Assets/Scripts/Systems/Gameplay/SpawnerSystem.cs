@@ -42,7 +42,7 @@ namespace MultiPong.Systems.Gameplay
             gameplayFactory.SpawnNetworkPresenter<EnvironmentPresenter>(
                 networkRunner: networkManager.NetworkRunner,
                 position: Vector2.zero
-            );
+            ).Setup(networkManager.Players);
         }
 
         private void SpawnHUDPresenter()

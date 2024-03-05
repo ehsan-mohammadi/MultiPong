@@ -22,6 +22,11 @@ namespace MultiPong.Presenters.Gameplay
         {
             this.onCollision = onCollision;
         }
+
+        public void SetPosition(Vector2 position)
+        {
+            rigidbody.position = position;
+        }
         
         public void SetVelocity(Vector2 direction)
         {

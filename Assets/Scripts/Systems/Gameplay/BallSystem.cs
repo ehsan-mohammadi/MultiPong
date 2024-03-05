@@ -2,7 +2,10 @@ using UnityEngine;
 
 namespace MultiPong.Systems.Gameplay
 {
+    using Managers;
     using Managers.Gameplay;
+    using Services;
+    using Events;
     using Presenters;
     using Presenters.Gameplay;
     using Data;
@@ -38,6 +41,14 @@ namespace MultiPong.Systems.Gameplay
                 case PaddlePresenter paddle:
                     var returnedDirection = CalculateReturnedDirectionFromPaddle(collision.collider);
                     ballData.Presenter.SetVelocity(returnedDirection);
+                    break;
+                case GoalPresenter goal:
+                    ServiceLocator.Find<EventManager>().Propagate(
+                        evt: new GoalScoredEvent(goal.Player),
+                        sender: this
+                    );
+                    ballData.Presenter.SetPosition(Vector2.zero);
+                    ballData.Presenter.SetVelocity(GenerateRandomDirection());
                     break;
                 default:
                     break;

@@ -442,6 +442,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textTimer: {fileID: 2886979957515365561}
+  textScoreForPlayer1: {fileID: 2608468559352842478}
+  textScoreForPlayer2: {fileID: 5505239761100732948}
 --- !u!1 &5108821640798558846
 GameObject:
   m_ObjectHideFlags: 0

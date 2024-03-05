@@ -13,7 +13,7 @@ This project made with Unity 2021.3.18f1.
 - Clone a copy of the repo:
 
 ```
-git clone https://github.com/ehsan-mohammadi/Another-LightBot.git
+git clone https://github.com/ehsan-mohammadi/MultiPong.git
 ```
 
 - Open the project with Unity

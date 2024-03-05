@@ -12,7 +12,6 @@ namespace MultiPong.Presenters.Gameplay
     {
         private Rigidbody2D rigidbody;
         private Vector2 direction;
-        private float speed;
 
         private Action<Collision2D> onCollision;
 
@@ -30,24 +29,12 @@ namespace MultiPong.Presenters.Gameplay
         
         public void SetVelocity(Vector2 direction)
         {
-            rigidbody.velocity = direction * speed;
+            rigidbody.velocity = direction;
         }
 
         public override void Spawned()
         {
             this.rigidbody = GetComponent<Rigidbody2D>();
-            this.speed = GameplaySettings.BallSpeed;
-        }
-
-        public override void FixedUpdateNetwork()
-        {
-            if (!IsServerPlayer())
-                return;
-
-            rigidbody.velocity = Vector2.ClampMagnitude(
-                vector: rigidbody.velocity,
-                maxLength: speed
-            );
         }
 
         private void OnCollisionEnter2D(Collision2D collision)

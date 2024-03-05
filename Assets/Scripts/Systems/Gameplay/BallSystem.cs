@@ -5,16 +5,21 @@ namespace MultiPong.Systems.Gameplay
     using Managers;
     using Managers.Gameplay;
     using Services;
+    using Settings;
     using Events;
     using Presenters;
     using Presenters.Gameplay;
     using Data;
+    using Data.Settings;
 
     public class BallSystem : GameplaySystem
     {
         private const float MIN_OFFSET = 0.25f;
         private const float MAX_DIRECTION = 1f;
+        private float speedFactor = 1;
         private BallData ballData;
+
+        private GameplaySettingsData GameplaySettings => GameSettings.Instance.Gameplay;
 
         public BallSystem(GameplayManager gameplayManager, ActivationMode activationMode)
             : base(gameplayManager, activationMode)
@@ -57,10 +62,11 @@ namespace MultiPong.Systems.Gameplay
 
         private Vector2 GenerateRandomDirection()
         {
+            ResetSpeedFactor();
             return new Vector2(
                 x: Mathf.Sign(Random.Range(-1f, 1f)),
                 y: 0
-            );
+            ) * GameplaySettings.BallSpeed;
         }
 
         private Vector2 CalculateReturnedDirectionFromPaddle(Collider2D collider)
@@ -75,7 +81,12 @@ namespace MultiPong.Systems.Gameplay
             if (returnedDirection.y == 0)
                 returnedDirection.y = MIN_OFFSET;
 
-            return returnedDirection.normalized;
+            IncreaseSpeedFactor();
+            return returnedDirection.normalized * GameplaySettings.BallSpeed * speedFactor;
         }
+
+        private void ResetSpeedFactor() => speedFactor = 1;
+        
+        private void IncreaseSpeedFactor() => speedFactor += GameplaySettings.BallSpeedFactor;
     }
 }

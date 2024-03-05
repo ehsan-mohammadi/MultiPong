@@ -22,3 +22,4 @@ MonoBehaviour:
     - {x: 6, y: 0}
     paddleSpeed: 8
     ballSpeed: 8
+    ballSpeedFactor: 0.125

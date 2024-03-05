@@ -11,10 +11,12 @@ namespace MultiPong.Data.Settings
         [SerializeField] private List<Vector2> spawnPositions;
         [SerializeField] private float paddleSpeed;
         [SerializeField] private float ballSpeed;
+        [SerializeField] private float ballSpeedFactor;
 
         public int GameTime => gameTime;
         public List<Vector2> SpawnPositions => spawnPositions;
         public float PaddleSpeed => paddleSpeed;
         public float BallSpeed => ballSpeed;
+        public float BallSpeedFactor => ballSpeedFactor;
     }
 }

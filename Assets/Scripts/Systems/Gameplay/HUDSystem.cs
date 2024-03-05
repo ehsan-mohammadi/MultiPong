@@ -45,8 +45,8 @@ namespace MultiPong.Systems.Gameplay
                 case HUDPresenterCreatedEvent hudPresenterCreated:
                     SetupPresenter(hudPresenterCreated.Presenter);
                     break;
-                case GoalScoredEvent goalReceived:
-                    UpdateScore(goalReceived.Player);
+                case GoalScoredEvent goalScored:
+                    UpdateScore(goalScored.Player);
                     break;
                 default:
                     break;
@@ -73,6 +73,7 @@ namespace MultiPong.Systems.Gameplay
             int index = networkManager.Players.IndexOf(player);
             int score = playersScores[player];
             presenter.SetPlayerScore(index, score);
+            presenter.PrepareForStart();
         }
 
         private void IncreaseScore(PlayerRef player) => playersScores[player]++;

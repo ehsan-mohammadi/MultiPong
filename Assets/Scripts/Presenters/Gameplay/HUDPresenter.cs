@@ -14,9 +14,12 @@ namespace MultiPong.Presenters.Gameplay
         [SerializeField] private TMP_Text textScoreForPlayer1;
         [SerializeField] private TMP_Text textScoreForPlayer2;
 
-        [Networked] private TickTimer Timer { get; set; }
+        [Networked] private TickTimer GameTimer { get; set; }
+        [Networked] private TickTimer DelayTimer { get; set; }
         [Networked] private int ScoreForPlayer1 { get; set; }
         [Networked] private int ScoreForPlayer2 { get; set; }
+
+        private bool isStarted;
 
         public override void Spawned()
         {
@@ -28,9 +31,20 @@ namespace MultiPong.Presenters.Gameplay
 
         public void Setup(int gameTime)
         {
-            Timer = TickTimer.CreateFromSeconds(
+            GameTimer = TickTimer.CreateFromSeconds(
                 runner: Runner,
                 delayInSeconds: gameTime
+            );
+
+            PrepareForStart();
+        }
+
+        public void PrepareForStart()
+        {
+            isStarted = false;
+            DelayTimer = TickTimer.CreateFromSeconds(
+                runner: Runner,
+                delayInSeconds: 2f
             );
         }
 
@@ -44,24 +58,59 @@ namespace MultiPong.Presenters.Gameplay
 
         public void FixedUpdate()
         {
-            UpdateTimer();
+            UpdatePlayingState();
             UpdateScores();
         }
 
-        private int GetRemianingTime()
+        private void ShowWaitingText()
         {
-            return Mathf.RoundToInt(Timer.RemainingTime(Runner) ?? 0);
+            textTimer.text = "READY?!";
         }
 
-        private void UpdateTimer()
+        private void UpdatePlayingState()
         {
-            textTimer.text = GetRemianingTime().ToString();
+            if (IsWaitingForStart())
+            {
+                ShowWaitingText();
+                return;
+            }
+            else if (IsNeededToStart())
+            {
+                SendStartPlayingEvent();
+                isStarted = true;
+            }
+            else
+            {
+                UpdateTimer();
+            }
+
+            bool IsWaitingForStart() => GetRemianingTime(DelayTimer) > 0;
+
+            bool IsNeededToStart() => DelayTimer.Expired(Runner) && !isStarted;
+
+            void SendStartPlayingEvent()
+            {
+                ServiceLocator.Find<EventManager>().Propagate(
+                    evt: new StartPlayingEvent(),
+                    sender: this
+                );
+            }
+
+            void UpdateTimer()
+            {
+                textTimer.text = GetRemianingTime(GameTimer).ToString();
+            }
         }
 
         private void UpdateScores()
         {
             textScoreForPlayer1.text = ScoreForPlayer1.ToString();
             textScoreForPlayer2.text = ScoreForPlayer2.ToString();
+        }
+
+        private int GetRemianingTime(TickTimer timer)
+        {
+            return Mathf.RoundToInt(timer.RemainingTime(Runner) ?? 0);
         }
     }
 }

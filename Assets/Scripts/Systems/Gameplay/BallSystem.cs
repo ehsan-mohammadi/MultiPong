@@ -12,7 +12,7 @@ namespace MultiPong.Systems.Gameplay
     using Data;
     using Data.Settings;
 
-    public class BallSystem : GameplaySystem
+    public class BallSystem : GameplaySystem, IEventListener
     {
         private const float MIN_OFFSET = 0.25f;
         private const float MAX_DIRECTION = 1f;
@@ -30,11 +30,24 @@ namespace MultiPong.Systems.Gameplay
         {
             ballData = GetBlackBoardData<BallData>();
             ballData.Presenter.Setup(onCollision: OnCollision);
-            ballData.Presenter.SetVelocity(GenerateRandomDirection());
+            ServiceLocator.Find<EventManager>().Register(this);
         }
 
         public override void Deactivate()
         {
+            ServiceLocator.Find<EventManager>().Unregister(this);
+        }
+
+        public void OnEvent(IEvent evt, object sender)
+        {
+            switch(evt)
+            {
+                case StartPlayingEvent:
+                    ballData.Presenter.SetVelocity(GenerateRandomDirection());
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void OnCollision(Collision2D collision)
@@ -48,12 +61,12 @@ namespace MultiPong.Systems.Gameplay
                     ballData.Presenter.SetVelocity(returnedDirection);
                     break;
                 case GoalPresenter goal:
+                    ballData.Presenter.SetPosition(Vector2.zero);
+                    ballData.Presenter.SetVelocity(Vector2.zero);
                     ServiceLocator.Find<EventManager>().Propagate(
                         evt: new GoalScoredEvent(goal.Player),
                         sender: this
                     );
-                    ballData.Presenter.SetPosition(Vector2.zero);
-                    ballData.Presenter.SetVelocity(GenerateRandomDirection());
                     break;
                 default:
                     break;

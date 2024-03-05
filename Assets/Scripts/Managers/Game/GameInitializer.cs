@@ -5,6 +5,7 @@ namespace MultiPong.Managers.Game
     using Foundation;
     using Managers;
     using Services;
+    using Settings;
     using Configurations;
 
     public class GameInitializer
@@ -38,6 +39,7 @@ namespace MultiPong.Managers.Game
             {
                 InitializeServiceLocator();
                 InitializeConfigurationService();
+                InitializeGameSettings();
             }
 
             void InitializeRootManagers()
@@ -87,6 +89,11 @@ namespace MultiPong.Managers.Game
             configurerService = new ConfigurerService();
             configurerService.Initialize();
             configurationMaster.Register(configurerService);
+        }
+
+        private void InitializeGameSettings()
+        {
+            var GameSettings = new GameSettings();
         }
 
         private void InitializeEventManager()

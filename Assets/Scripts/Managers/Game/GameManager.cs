@@ -59,6 +59,11 @@ namespace MultiPong.Managers.Game
                     GetManager<TransitionManager>().GoToPlay();
                     PreparingGameplayManager();
                     break;
+                case GameState.ConnectionLost:
+                    Debug.Log("Switched GameState to ConnectionLost.");
+                    GetManager<TransitionManager>().GoToConnectionLost();
+                    PreparingGameEnding();
+                    break;
                 case GameState.End:
                     Debug.Log("Switched GameState to End.");
                     GetManager<TransitionManager>().GoToGameOver();

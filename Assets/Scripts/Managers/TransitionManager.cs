@@ -44,6 +44,14 @@ namespace MultiPong.Managers
             gameOverPresentationHandler.OpenGameOverPopup();
         }
 
+        public void GoToConnectionLost()
+        {
+            CloseAllPopups();
+            
+            var connectionLostPresentationHandler = new ConnectionLostPresentationHandler();
+            connectionLostPresentationHandler.OpenConnectionLostPopup();
+        }
+
         private void CloseAllPopups()
         {
             PopupManager.CloseAll();

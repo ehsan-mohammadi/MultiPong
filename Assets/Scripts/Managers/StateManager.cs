@@ -5,7 +5,7 @@ namespace MultiPong.Managers
     using Services;
     using Events;
 
-    public enum GameState { Start, WaitingForOpponent, Play, End }
+    public enum GameState { Start, WaitingForOpponent, Play, End, ConnectionLost }
 
     public class StateManager : IManager, IEventListener
     {
@@ -53,6 +53,9 @@ namespace MultiPong.Managers
                     break;
                 case GameOverEvent:
                     GoToState(GameState.End);
+                    break;
+                case ConnectionLostEvent:
+                    GoToState(GameState.ConnectionLost);
                     break;
                 case RestartButtonClickedEvent:
                     GoToState(GameState.Start);

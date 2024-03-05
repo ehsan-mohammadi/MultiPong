@@ -109,8 +109,16 @@ namespace MultiPong.Managers
 
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
         {
-           UnityEngine.Debug.Log($"Player left with id: {player.PlayerId}");
-           players.Remove(player);
+            UnityEngine.Debug.Log($"Player left with id: {player.PlayerId}");
+            players.Remove(player);
+
+            if (player == runner.LocalPlayer)
+                return;
+           
+            EventManager.Propagate(
+                evt: new ConnectionLostEvent(),
+                sender: this
+            );
         }
 
         public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress)
@@ -135,6 +143,10 @@ namespace MultiPong.Managers
 
         public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
         {
+            EventManager.Propagate(
+                evt: new ConnectionLostEvent(),
+                sender: this
+            );
         }
 
         public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message)

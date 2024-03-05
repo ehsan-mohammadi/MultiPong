@@ -40,6 +40,7 @@ namespace MultiPong.Managers.Gameplay
             AddSystem(new HUDSystem(gameplayManager, ActivationMode.ServerOnly));
             AddSystem(new SpawnerSystem(gameplayManager, ActivationMode.ServerOnly));
             AddSystem(new BallSystem(gameplayManager, ActivationMode.ServerOnly));
+            AddSystem(new PowerUpSystem(gameplayManager, ActivationMode.ServerOnly));
         }
 
         private void AddSystem(GameplaySystem system)

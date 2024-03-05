@@ -32,6 +32,11 @@ namespace MultiPong.Presenters.Gameplay
             rigidbody.velocity = direction;
         }
 
+        public Vector2 GetVelocity()
+        {
+            return rigidbody.velocity;
+        }
+
         public override void Spawned()
         {
             this.rigidbody = GetComponent<Rigidbody2D>();

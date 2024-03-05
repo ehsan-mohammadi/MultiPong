@@ -1,21 +1,12 @@
-using UnityEngine;
-
 namespace MultiPong.Settings
 {
+    using Services;
     using Data.Settings;
-    using Values;
 
-    [CreateAssetMenu(
-        fileName = nameof(GameSettings), 
-        menuName = AssetMenu.SETTINGS + "/" + nameof(GameSettings)
-    )]
-    public class GameSettings : ScriptableObject
+    public class GameSettings
     {
-        [SerializeField] private NetworkSettingsData network;
-        [SerializeField] private GameplaySettingsData gameplay;
-
-        public NetworkSettingsData Network => network;
-        public GameplaySettingsData Gameplay => gameplay;
+        public NetworkSettingsData Network { get; private set; }
+        public GameplaySettingsData Gameplay { get; private set; }
 
         public static GameSettings Instance;
 
@@ -25,6 +16,14 @@ namespace MultiPong.Settings
                 return;
             
             Instance = this;
+
+            ServiceLocator.Find<ConfigurerService>().Configure(this);
+        }
+
+        public void Setup(NetworkSettingsData network, GameplaySettingsData gameplay)
+        {
+            this.Network = network;
+            this.Gameplay = gameplay;
         }
     }
 }

@@ -8,7 +8,13 @@ namespace MultiPong.Presenters
     {
         public void Despawn()
         {
-            Runner.Despawn(Object);
+            try
+            {
+                Runner.Despawn(Object);
+            }
+            catch
+            {
+            }
         }
     }
 }

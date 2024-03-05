@@ -41,5 +41,10 @@ namespace MultiPong.Foundation
         {
             return entities.Select(entity => entity.Value);
         }
+
+        public void Clear()
+        {
+            entities.Clear();
+        }
     }
 }

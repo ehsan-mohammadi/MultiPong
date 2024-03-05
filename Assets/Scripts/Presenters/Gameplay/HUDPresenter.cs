@@ -60,6 +60,7 @@ namespace MultiPong.Presenters.Gameplay
         {
             UpdatePlayingState();
             UpdateScores();
+            CheckForFinishingGame();
         }
 
         private void ShowWaitingText()
@@ -106,6 +107,15 @@ namespace MultiPong.Presenters.Gameplay
         {
             textScoreForPlayer1.text = ScoreForPlayer1.ToString();
             textScoreForPlayer2.text = ScoreForPlayer2.ToString();
+        }
+
+        private void CheckForFinishingGame()
+        {
+            if (GetRemianingTime(GameTimer) == 0)
+                ServiceLocator.Find<EventManager>().Propagate(
+                    evt: new GameOverEvent(),
+                    sender: this
+                );
         }
 
         private int GetRemianingTime(TickTimer timer)

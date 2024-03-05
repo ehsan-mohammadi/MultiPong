@@ -4,13 +4,13 @@ namespace MultiPong.Handlers.Presentations
     using Services;
     using Presenters.Popups;
 
-    public class WaitingForOpponentPresentationHandler : IPresentationHandler
+    public class GameOverPresentationHandler : IPresentationHandler
     {
         private PopupManager PopupManager => ServiceLocator.Find<PopupManager>();
 
-        public void OpenWaitingForOpponentPopup()
+        public void OpenGameOverPopup()
         {
-            PopupManager.OpenPopup<WaitingForOpponentPopup>();
+            PopupManager.OpenPopup<GameOverPopup>();
         }
     }
 }

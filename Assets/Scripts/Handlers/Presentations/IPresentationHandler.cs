@@ -1,4 +1,4 @@
-namespace MultiPong.Handlers.Presentaions
+namespace MultiPong.Handlers.Presentations
 {
     public interface IPresentationHandler
     {

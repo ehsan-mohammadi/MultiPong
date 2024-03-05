@@ -51,6 +51,9 @@ namespace MultiPong.Managers
                 case AllPlayersJoinedEvent:
                     GoToState(GameState.Play);
                     break;
+                case GameOverEvent:
+                    GoToState(GameState.End);
+                    break;
                 default:
                     break;
             }

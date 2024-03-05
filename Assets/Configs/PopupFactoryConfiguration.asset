@@ -15,3 +15,4 @@ MonoBehaviour:
   popups:
   - {fileID: 6860497088290284971, guid: 42bbfff5d67052044846aca57f3129b2, type: 3}
   - {fileID: 7531788812730417955, guid: cacf529f7f01d044bb67d918dc230b37, type: 3}
+  - {fileID: 1634543369167149201, guid: b78a0019057877d478bda303e4bb025b, type: 3}

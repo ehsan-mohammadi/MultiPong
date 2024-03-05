@@ -46,6 +46,7 @@ namespace MultiPong.Managers.Game
                 InitializePopupManager();
                 InitializeTransitionManager();
                 InitializeStateManager();
+                InitializeCollectorManager();
             }
 
             void ActivateRootManagers()
@@ -61,6 +62,14 @@ namespace MultiPong.Managers.Game
 
             if (manager is IUpdateableManager)
                 updateableManagers.Add(manager as IUpdateableManager);
+        }
+
+        internal void RemoveManager(IManager manager)
+        {
+            managers.Remove(manager);
+
+            if (updateableManagers.IsExists(manager.GetType()))
+                updateableManagers.Remove(manager as IUpdateableManager);
         }
 
         internal void ActivateManager(IManager manager)
@@ -103,6 +112,12 @@ namespace MultiPong.Managers.Game
             var stateManager = new StateManager();
             stateManager.Setup(gameManager.PrepareForState);
             AddManager(stateManager);
+        }
+
+        internal void InitializeCollectorManager()
+        {
+            var collectorManager = new CollectorManager();
+            AddManager(collectorManager);
         }
     }
 }

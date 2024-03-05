@@ -1,6 +1,6 @@
 namespace MultiPong.Presenters.Popups
 {
-    public class WaitingForOpponentPopup : BasePopup
+    public class GameOverPopup : BasePopup
     {
     }
 }

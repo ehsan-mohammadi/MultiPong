@@ -61,6 +61,8 @@ namespace MultiPong.Managers.Game
                     break;
                 case GameState.End:
                     Debug.Log("Switched GameState to End.");
+                    GetManager<TransitionManager>().GoToGameOver();
+                    PreparingGameEnding();
                     break;
                 default:
                     break;
@@ -79,6 +81,36 @@ namespace MultiPong.Managers.Game
             var gameplayManager = new GameplayManager();
             AddManager(gameplayManager);
             ActivateManager(gameplayManager);
+        }
+
+        private void PreparingGameEnding()
+        {
+            var gameplayManager = GetManager<GameplayManager>();
+            var networkManager = GetManager<NetworkManager>();
+            var collectorManager = GetManager<CollectorManager>();
+
+            CollectNetworkPresenters();
+            DeactivateGameplayManager();
+            RemoveNetworkRunnerCallbacks();
+            ShutdownNetworkManager();
+            RemoveNeededManagers();
+            CollectNetworkServices();
+
+            void CollectNetworkPresenters() => collectorManager.CollectNetworkPresenters();
+
+            void DeactivateGameplayManager() => gameplayManager.Deactivate();
+
+            void RemoveNetworkRunnerCallbacks() => networkManager.RemoveNetworkRunnerCallbacks();
+
+            void ShutdownNetworkManager() => networkManager.NetworkRunner.Shutdown();
+
+            void RemoveNeededManagers()
+            {
+                initializer.RemoveManager(gameplayManager);
+                initializer.RemoveManager(networkManager);
+            }
+
+            void CollectNetworkServices() => collectorManager.CollectNetworkServices();
         }
 
         private T GetManager<T>() where T : IManager => initializer.Managers.Get<T>();

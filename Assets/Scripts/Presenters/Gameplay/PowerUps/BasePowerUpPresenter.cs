@@ -15,11 +15,6 @@ namespace MultiPong.Presenters.Gameplay.PowerUps
             this.onTrigger = onTrigger;
         }
 
-        public void Despawn()
-        {
-            Runner.Despawn(Object);
-        }
-
         public void OnTriggerEnter2D(Collider2D collider)
         {
             onTrigger.Invoke(Type);

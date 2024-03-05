@@ -1,7 +1,7 @@
 namespace MultiPong.Managers
 {
     using Services;
-    using Handlers.Presentaions;
+    using Handlers.Presentations;
 
     public class TransitionManager : IManager
     {
@@ -34,6 +34,14 @@ namespace MultiPong.Managers
         public void GoToPlay()
         {
             CloseAllPopups();
+        }
+
+        public void GoToGameOver()
+        {
+            CloseAllPopups();
+
+            var gameOverPresentationHandler = new GameOverPresentationHandler();
+            gameOverPresentationHandler.OpenGameOverPopup();
         }
 
         private void CloseAllPopups()

@@ -142,6 +142,8 @@ namespace MultiPong.Managers
 
         private void AddNetworkRunnerCallbacks() => networkRunner.AddCallbacks(this);
 
+        public void RemoveNetworkRunnerCallbacks() => networkRunner.RemoveCallbacks(this);
+
         private async void StartGame(GameMode mode)
         {
             networkRunner.ProvideInput = true;

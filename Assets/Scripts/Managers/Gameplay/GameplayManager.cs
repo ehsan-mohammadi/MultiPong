@@ -25,6 +25,8 @@ namespace MultiPong.Managers.Gameplay
         {
             foreach(var system in GetSystems())
                 system.Deactivate();
+            
+            initializer.RemoveAllSystems();
         }
 
         public void Update()

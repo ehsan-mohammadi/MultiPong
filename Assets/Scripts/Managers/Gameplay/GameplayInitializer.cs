@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 
 namespace MultiPong.Managers.Gameplay
@@ -59,6 +60,11 @@ namespace MultiPong.Managers.Gameplay
 
                 bool IsCalledFromServer() => networkManager.NetworkRunner.IsServer;
             }
+        }
+
+        internal void RemoveAllSystems()
+        {
+            systems.Clear();
         }
     }
 }
